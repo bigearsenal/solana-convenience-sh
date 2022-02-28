@@ -1,0 +1,17 @@
+#!/bin/bash
+echo "Close all zero balances"
+count = 0
+while read -r account;
+do 
+    if (( "$count" >= 2 )); then
+        mint="${account%% *}"
+        amountUtr="${account#* }"
+        amount=`echo $amountUtr | sed 's/ *$//g'`
+        if ! [ -z "$amount" ] && (( $(echo "$amount == 0" |bc -l) )); then
+            echo "Close $mint..."
+            spl-token close $mint
+            echo "----" 
+        fi
+    fi
+    (( count++ ))
+done < <(spl-token accounts) 

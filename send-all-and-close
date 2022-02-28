@@ -1,0 +1,16 @@
+#!/bin/bash
+recipient=$1
+
+# check recipient
+if [ -z "$1" ]
+  then
+    echo "No recipient provided"
+    exit 1
+fi
+
+# send
+echo "Sending all tokens to $recipient, close zero-balance token and transfer all SOL to $recipient..."
+
+./send-all $recipient
+./close-all
+./send-all-sol $recipient

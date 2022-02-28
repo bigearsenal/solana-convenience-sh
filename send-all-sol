@@ -1,0 +1,21 @@
+#!/bin/bash
+recipient=$1
+
+# check recipient
+if [ -z "$1" ]
+  then
+    echo "No recipient provided"
+    exit 1
+fi
+
+# send
+echo "Sending all SOL to $recipient..."
+
+output=`solana balance`;
+amount="${output%% *}"
+echo $amount
+
+if (( $(echo "$amount > 0" |bc -l) )); then
+   echo "Send all $amount SOL to $recipient"
+   solana transfer $recipient $(echo "$amount - 0.000005" |bc -l)
+fi
