@@ -1,10 +1,7 @@
 # Convenience bash files for solana cli
 ## Set permission
 ```sh
-chmod u+x ./send-all-and-close
-chmod u+x ./send-all
-chmod u+x ./close-all
-chmod u+x ./send-all-sol
+chmod -R u+x .
 ```
 
 ## Install solana-cli and spl-token cli
